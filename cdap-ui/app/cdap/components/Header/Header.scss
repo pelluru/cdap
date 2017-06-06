@@ -1,0 +1,187 @@
+/*
+ * Copyright © 2017 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+@import '../../styles/variables.scss';
+
+.global-navbar {
+  height: 50px;
+  background: $navbar-bg;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+
+  a,
+  button,
+  i,
+  li,
+  li a,
+  .with-shadow,
+  .dropdown-item {
+    color: white;
+    &:hover,
+    &:active {
+      color: $cdap-light-orange;
+
+    }
+    .active {
+      color: $cdap-orange;
+      &:focus,
+      &:hover {
+        outline: none;
+        color: $cdap-orange;
+      }
+    }
+  }
+
+  .global-navbar-toggler {
+    display: none;
+
+    @media(max-width: 860px) {
+      display: inline-flex;
+      height: 50px;
+      padding-top: 0;
+      order: 3;
+      background: transparent;
+      border: transparent;
+      &:hover {
+        background: transparent;
+        border: transparent;
+      }
+      i {
+        line-height: 47px;
+      }
+    }
+  }
+
+  .brand-section {
+    display: inline-block;
+    vertical-align: top;
+    min-width: 108px;
+    img {
+      height: 50px;
+    }
+  }
+
+  .global-navbar-collapse {
+    @media(max-width: 860px) {
+      display: none;
+      &.minimized {
+        display: block;
+        background-color: inherit;
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        left: 0;
+      }
+    }
+    line-height: 50px;
+    .navbar-right-section {
+      vertical-align: top;
+      display: inline-flex;
+      justify-content: flex-end;
+
+      .cask-market-button {
+        display: block;
+
+        [class*="icon-"] {
+          margin-right: 5px;
+        }
+      }
+
+      li {
+        vertical-align: top;
+        &.with-shadow {
+          box-shadow: -18px 0px 24px -9px rgba(0, 0, 0, 0.4);
+          height: 50px;
+          line-height: 50px;
+          padding-left: 10px;
+          margin-left: 0;
+          margin-right: 0;
+          min-width: 120px;
+          cursor: pointer;
+        }
+        .namespace-dropdown {
+          border: 0;
+          .dropdown {
+            .dropdown-menu {
+              padding: 0;
+            }
+            .current-namespace {
+              background: transparent;
+              &:hover {
+                background: transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline-block;
+      margin: 0 15px;
+      vertical-align: top;
+      line-height: 50px;
+      &:focus {
+        outline: none;
+      }
+
+      a {
+        color: inherit;
+        display: block;
+        background: transparent;
+        text-decoration: none;
+      }
+    }
+  }
+  .navbar-list-section {
+    display: inline-flex;
+    min-width: 300px;
+    align-items: baseline;
+    flex: 1;
+    align-items: flex-start;
+  }
+  .navbar-list-section,
+  .navbar-right-section {
+    .dropdown {
+      .dropdown-menu {
+        padding-bottom: 10px;
+        .dropdown-divider {
+          height: 1px;
+          margin: 0.5rem 0;
+          overflow: hidden;
+        }
+      }
+    }
+    .dropdown.open {
+      .dropdown-toggle {
+        background-color: transparent;
+        color: inherit;
+        &.active {
+          &:hover {
+            color: $cdap-light-orange;
+          }
+        }
+      }
+    }
+  }
+
+}

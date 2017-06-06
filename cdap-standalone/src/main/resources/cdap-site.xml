@@ -1,0 +1,248 @@
+<!--
+  Copyright © 2014-2017 Cask Data, Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy of
+  the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  License for the specific language governing permissions and limitations under
+  the License.
+  -->
+<configuration>
+
+  <!-- Global Configuration -->
+
+  <property>
+    <name>enable.unrecoverable.reset</name>
+    <value>true</value>
+    <description>
+      Determines if resetting CDAP should be enabled. **WARNING: Enabling
+      this option makes it possible to delete all applications and data; NO
+      RECOVERY IS POSSIBLE!**
+    </description>
+  </property>
+
+
+  <!-- Applications Configuration -->
+
+  <property>
+    <name>app.artifact.dir</name>
+    <value>artifacts;artifacts/${app.program.spark.compat}</value>
+    <description>
+      Semicolon-separated list of local directories scanned for system artifacts
+      to add to the artifact repository
+    </description>
+  </property>
+
+  <property>
+    <name>app.program.runtime.extensions.dir</name>
+    <value>ext/runtimes</value>
+    <description>
+      Semicolon-separated list of local directories that are scanned for
+      program runtime extensions
+    </description>
+  </property>
+
+  <property>
+    <name>app.program.spark.compat</name>
+    <value>spark1_2.10</value>
+    <description>
+      Spark compatibility version. Must be 'spark1_2.10' or 'spark2_2.11'. This is only
+      used in CDAP Local Sandbox mode. In Distributed CDAP mode, the Spark version will be
+      automatically detected.
+    </description>
+  </property>
+
+  <!-- Preview Configuration -->
+
+  <property>
+    <name>enable.preview</name>
+    <value>true</value>
+    <description>
+      Determines if preview should be enabled.
+    </description>
+  </property>
+
+  <property>
+    <name>preview.cache.size</name>
+    <value>10</value>
+    <description>
+      Number of preview runs for which data will be stored in memory. When size exceeds,
+      data for the oldest run will be removed from memory and no longer retrievable.
+    </description>
+  </property>
+
+
+  <!-- Datasets Configuration -->
+
+  <property>
+    <name>data.local.storage.blocksize</name>
+    <value>1024</value>
+    <description>
+      Block size in bytes for data fabric when in CDAP Local Sandbox
+    </description>
+  </property>
+
+  <property>
+    <name>data.local.storage.cachesize</name>
+    <value>104857600</value>
+    <description>
+      Cache size in bytes for data fabric when in CDAP Local Sandbox
+    </description>
+  </property>
+
+
+  <!-- Logging Configuration -->
+
+  <property>
+    <name>log.base.dir</name>
+    <value>logs/avro</value>
+    <description>
+      Base log directory
+    </description>
+  </property>
+
+  <property>
+    <name>log.process.pipeline.config.dir</name>
+    <value>ext/logging/config</value>
+    <description>
+      A local directory on the CDAP Master that is scanned for log processing pipeline
+      configurations. Each pipeline is defined by a file in the logback XML format, with
+      ".xml" as the file name extension.
+    </description>
+  </property>
+
+  <property>
+    <name>log.process.pipeline.event.delay.ms</name>
+    <value>100</value>
+    <description>
+      The time a log event stays in the log processing pipeline buffer before
+      writing out to log appenders in milliseconds. A longer delay will result
+      in less frequent flush to disk but longer for logs to be available.
+    </description>
+  </property>
+
+  <property>
+    <name>log.process.pipeline.lib.dir</name>
+    <value>ext/logging/lib</value>
+    <description>
+      Semicolon-separated list of local directories on the CDAP Master scanned
+      for additional library JAR files to be included for log processing
+    </description>
+  </property>
+
+  <property>
+    <name>log.pipeline.cdap.file.permissions</name>
+    <value> </value>
+    <description>
+      We don't want to use set permissions in CDAP Local Sandbox, as posix permissions are
+      not supported on the Windows FS.
+    </description>
+  </property>
+
+  <property>
+    <name>log.pipeline.cdap.dir.permissions</name>
+    <value> </value>
+    <description>
+      We don't want to use set permissions in CDAP Local Sandbox, as posix permissions are
+      not supported on the Windows FS.
+    </description>
+  </property>
+
+  <!-- Metrics Configuration -->
+
+  <property>
+    <name>metrics.data.table.retention.resolution.1.seconds</name>
+    <value>7200</value>
+    <description>
+      Retention resolution in seconds of the 1-second resolution table;
+      default retention period is 2 hours
+    </description>
+  </property>
+
+  <!-- Operational Stats Configuration -->
+  <property>
+    <name>operational.stats.extensions.dir</name>
+    <value>ext/operations</value>
+    <description>
+      Semicolon-separated list of local directories on the CDAP Master
+      that are scanned for operational statistics extensions
+    </description>
+  </property>
+
+
+  <!-- Tephra Configuration -->
+  <property>
+    <name>data.tx.prune.enable</name>
+    <value>false</value>
+    <description>
+      Disable invalid list transaction pruning
+    </description>
+  </property>
+
+  <!-- Router Configuration -->
+
+  <property>
+    <name>router.address</name>
+    <value>127.0.0.1</value>
+    <description>
+      CDAP Router service address to which CDAP UI connects (deprecated; use
+      router.server.address directly)
+    </description>
+  </property>
+
+  <property>
+    <name>router.bind.address</name>
+    <value>0.0.0.0</value>
+    <description>
+      CDAP Router service bind address
+    </description>
+  </property>
+
+  <property>
+    <name>router.server.address</name>
+    <value>${router.address}</value>
+    <description>
+      CDAP Router service address to which CDAP UI connects
+    </description>
+  </property>
+
+
+  <!-- Stream Configuration -->
+
+  <property>
+    <name>stream.container.instances</name>
+    <value>1</value>
+    <description>
+      Number of YARN container instances for the stream handler; in CDAP Local Sandbox, it
+      is always one
+    </description>
+  </property>
+
+  <property>
+    <name>tracker.app.config</name>
+    <value>{
+             "auditLogConfig" : {
+               "topic" : "${audit.topic}"
+             }
+           }
+    </value>
+    <description>
+      Application configuration for Tracker
+    </description>
+  </property>
+
+  <property>
+    <name>kerberos.auth.enabled</name>
+    <value>false</value>
+    <description>
+      Determines if Kerberos authentication is enabled
+    </description>
+  </property>
+
+</configuration>
